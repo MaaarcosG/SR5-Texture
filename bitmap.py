@@ -367,8 +367,6 @@ class Bitmap(object):
 					self.point(x,y,color)
 					self.zbuffer[x][y] = z
 
-
-
 	#Vector 3 transformado
 	def transform(self, vertex, translate=(0, 0, 0), scale=(1, 1, 1)):
 		#Transformando los datos
@@ -442,7 +440,7 @@ class Bitmap(object):
 		objetos = Obj(filename)
 		caras = objetos.faces
 		vertexes = objetos.vertices
-		vt = objetos.vt
+		
 		luz = v3(0,0,1)
 
 		for face in caras:
@@ -469,9 +467,9 @@ class Bitmap(object):
 					vTexture2 = face[1][0] - 1
 					vTexture3 = face[2][0] - 1
 
-					texture_A = v3(*vt[vTexture1])
-					texture_B = v3(*vt[vTexture2])
-					texture_C = v3(*vt[vTexture3])
+					texture_A = v3(*objetos.vt[vTexture1])
+					texture_B = v3(*objetos.vt[vTexture2])
+					texture_C = v3(*objetos.vt[vTexture3])
 
 					self.triangulos(vector_1,vector_2,vector_3, texture=texture, cT =(texture_A,texture_B,texture_C), intensidad=intensidad)
 			else:
@@ -508,10 +506,11 @@ class Bitmap(object):
 					vTexture3 = face[2][0] - 1
 					vTexture4 = face[3][0] - 1
 
-					texture_A = v3(*vt[vTexture1])
-					texture_B = v3(*vt[vTexture2])
-					texture_C = v3(*vt[vTexture3])
-					texture_D = v3(*vt[vTexture4])
+					texture_A = v3(*objetos.vt[vTexture1])
+					texture_B = v3(*objetos.vt[vTexture2])
+					texture_C = v3(*objetos.vt[vTexture3])
+					texture_D = v3(*objetos.vt[vTexture4])
 
+					#Dibujamos
 					self.triangulos(lista_vertices[0], lista_vertices[1], lista_vertices[2], texture=texture, cT =(texture_A,texture_B,texture_C), intensidad=intensidad)
 					self.triangulos(lista_vertices[0], lista_vertices[2], lista_vertices[3], texture=texture, cT =(texture_A,texture_C,texture_D), intensidad=intensidad)
